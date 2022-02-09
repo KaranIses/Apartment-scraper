@@ -3,6 +3,15 @@ import scrapy
 
 class EbaySpider(scrapy.Spider):
     name = "ebay"
+    custom_settings = {
+        'FEEDS': {
+            f'ebay.json': {
+                'format': 'json',
+                'overwrite': False
+            }
+        }
+    }
+
     start_urls = [
         'https://www.ebay-kleinanzeigen.de/s-wohnung-mieten/berlin/anzeige:angebote/preis:100:600/c203l3331'
         '+wohnung_mieten.etage_i:1%2C8+wohnung_mieten.qm_d:35%2C60+wohnung_mieten.swap_s:nein+wohnung_mieten'

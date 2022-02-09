@@ -3,6 +3,15 @@ import scrapy
 
 class ImmonetSpider(scrapy.Spider):
     name = "immonet"
+    custom_settings = {
+        'FEEDS': {
+            f'immonet.json': {
+                'format': 'json',
+                'overwrite': False
+            }
+        }
+    }
+
     start_urls = [
         'https://www.immonet.de/immobiliensuche/sel.do?pageoffset=1&listsize=26&objecttype=1&locationname=Berlin&acid'
         '=&actype=&district=7603&district=7604&district=7605&district=7879&ajaxIsRadiusActive=true&sortby=19&suchart'

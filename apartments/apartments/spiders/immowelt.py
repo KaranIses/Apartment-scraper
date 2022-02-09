@@ -3,6 +3,15 @@ import scrapy
 
 class ImmoweltSpider(scrapy.Spider):
     name = "immowelt"
+    custom_settings = {
+        'FEEDS': {
+            f'immowelt.json': {
+                'format': 'json',
+                'overwrite': False
+            }
+        }
+    }
+
     start_urls = [
         'https://www.immowelt.de/liste/berlin-lichtenberg/wohnungen/mieten?ama=60&ami=35&d=true&lids=499908&lids'
         '=499909&pma=700&rma=2&rmi=1&sd=DESC&sf=TIMESTAMP&sp=1'

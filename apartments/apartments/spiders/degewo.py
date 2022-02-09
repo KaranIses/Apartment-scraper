@@ -3,6 +3,15 @@ import scrapy
 
 class DegewoSpider(scrapy.Spider):
     name = "degewo"
+    custom_settings = {
+        'FEEDS': {
+            f'degewo.json': {
+                'format': 'json',
+                'overwrite': False
+            }
+        }
+    }
+
     start_urls = [
         'https://immosuche.degewo.de/de/search?size=10&page=1&property_type_id=1&categories%5B%5D=1&lat=&lon=&area'
         '=&address%5Bstreet%5D=&address%5Bcity%5D=&address%5Bzipcode%5D=&address%5Bdistrict%5D=&district=33%2C+46%2C'
