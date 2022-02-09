@@ -1,4 +1,4 @@
-# Scrapy settings for apartements project
+# Scrapy settings for apartments project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,10 +7,10 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'apartements'
+BOT_NAME = 'apartments'
 
-SPIDER_MODULES = ['apartements.spiders']
-NEWSPIDER_MODULE = 'apartements.spiders'
+SPIDER_MODULES = ['apartments.spiders']
+NEWSPIDER_MODULE = 'apartments.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 ' \
@@ -45,13 +45,13 @@ ROBOTSTXT_OBEY = False
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    'apartements.middlewares.ApartementsSpiderMiddleware': 543,
+#    'apartments.middlewares.ApartementsSpiderMiddleware': 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#    'apartements.middlewares.ApartementsDownloaderMiddleware': 543,
+#    'apartments.middlewares.ApartementsDownloaderMiddleware': 543,
 # }
 
 # Enable or disable extensions
@@ -63,7 +63,7 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 # ITEM_PIPELINES = {
-#    'apartements.pipelines.ApartementsPipeline': 300,
+#    'apartments.pipelines.ApartementsPipeline': 300,
 # }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
