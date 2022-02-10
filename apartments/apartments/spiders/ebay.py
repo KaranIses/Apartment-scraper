@@ -1,9 +1,5 @@
-import json
 import re
-
 import scrapy
-
-from apartments.apartments.items import ApartmentsItem
 
 
 class EbaySpider(scrapy.Spider):
