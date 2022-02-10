@@ -43,7 +43,8 @@ def analyse_apartments(apartments, new_apartments_dict):
             address=new_apartment['Adresse'],
             size=new_apartment['Größe'],
             rooms=new_apartment['Zimmer'],
-            price=new_apartment['Preis']
+            price=new_apartment['Preis'],
+            link=new_apartment['Link']
         )
         new_apartments.append(new_apartment_item)
 

@@ -24,5 +24,6 @@ class EbaySpider(scrapy.Spider):
                 'Adresse': titles.css("div.aditem-main--top--left::text").extract()[1].strip().replace('\n', '').replace('\t', ''),
                 'Größe': re.sub("[^0-9,]", "", titles.css("span.simpletag.tag-small::text").extract()[0]),
                 'Zimmer': re.sub("[^0-9,]", "", titles.css("span.simpletag.tag-small::text").extract()[1]),
-                'Preis': re.sub("[^0-9,]", "", titles.css("p.aditem-main--middle--price::text").extract_first())
+                'Preis': re.sub("[^0-9,]", "", titles.css("p.aditem-main--middle--price::text").extract_first()),
+                'Link': f'https://www.ebay-kleinanzeigen.de{titles.css("a.ellipsis::attr(href)").extract_first()}'
             }

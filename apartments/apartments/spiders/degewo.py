@@ -25,5 +25,6 @@ class DegewoSpider(scrapy.Spider):
                 'Adresse': titles.css("span.article__meta::text").get(),
                 'Größe': re.sub("[^0-9,]", "", titles.css("li.article__properties-item span.text::text").extract()[1]),
                 'Zimmer': re.sub("[^0-9,]", "", titles.css("li.article__properties-item span.text::text").extract()[0]),
-                'Preis': re.sub("[^0-9,]", "", titles.css("div.article__price-tag span::text").extract()[1])
+                'Preis': re.sub("[^0-9,]", "", titles.css("div.article__price-tag span::text").extract()[1]),
+                'Link': f'https://immosuche.degewo.de{titles.css("a::attr(href)").extract_first()}'
             }
