@@ -38,7 +38,7 @@ async def analyse(spider_name: str):
             return
         if spider_name == 'immonet':
             print(f'Neue analyse von Immonet: \n{immonet_apartments}')
-            immonent_apartments = await analyse_apartments(immonet_apartments, apartments)
+            immonet_apartments = await analyse_apartments(immonet_apartments, apartments)
             return
         if spider_name == 'immowelt':
             print(f'Neue analyse von Immowelt: \n{immowelt_apartments}')
