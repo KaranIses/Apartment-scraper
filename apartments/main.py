@@ -20,8 +20,7 @@ process = CrawlerProcess(get_project_settings())
 def _crawl(result, spider):
     deferred = process.crawl(spider)
     deferred.addCallback(lambda results: print('Waiting 15 seconds before restart'))
-    deferred.addCallback(analyse, spider_name=spider.name)
-    deferred.addCallback(sleep, seconds=15)
+    deferred.addCallback(sleep, seconds=60)
     deferred.addCallback(_crawl, spider)
     return deferred
 
