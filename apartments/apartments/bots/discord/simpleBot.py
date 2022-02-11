@@ -101,4 +101,4 @@ async def send_update(apartment: ApartmentItem):
 
 
 get_apartments.start()
-client.run('OTQxMzU0NjkwMjU0MzQ0Mjgz.YgUu3w.FNlqHMbQl-1hutZb_xZoEZsikRc')
+client.run('YOUR_TOKEN')
