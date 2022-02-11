@@ -1,4 +1,5 @@
 import json
+from json import JSONDecodeError
 
 import discord
 from discord.ext import tasks
@@ -21,29 +22,37 @@ degewo_apartments = []
 ebay_apartments = []
 immonet_apartments = []
 immowelt_apartments = []
+wbm_apartments = []
 
 
 async def analyse(spider_name: str):
-    global degewo_apartments, ebay_apartments, immonet_apartments, immowelt_apartments
+    global degewo_apartments, ebay_apartments, immonet_apartments, immowelt_apartments, wbm_apartments
     with open(f'C:\\Users\\ericz\\PycharmProjects\\Apartment-scraper\\apartments\\{spider_name}.json', 'r',
               encoding='utf-8') as apartments_json:
-        apartments = json.load(apartments_json)
-        if spider_name == 'degewo':
-            print(f'Neue analyse von Degewo: \n{degewo_apartments}')
-            degewo_apartments = await analyse_apartments(degewo_apartments, apartments)
-            return
-        if spider_name == 'ebay':
-            print(f'Neue analyse von Ebay: \n{ebay_apartments}')
-            ebay_apartments = await analyse_apartments(ebay_apartments, apartments)
-            return
-        if spider_name == 'immonet':
-            print(f'Neue analyse von Immonet: \n{immonet_apartments}')
-            immonet_apartments = await analyse_apartments(immonet_apartments, apartments)
-            return
-        if spider_name == 'immowelt':
-            print(f'Neue analyse von Immowelt: \n{immowelt_apartments}')
-            immowelt_apartments = await analyse_apartments(immowelt_apartments, apartments)
-            return
+        try:
+            apartments = json.load(apartments_json)
+            if spider_name == 'degewo':
+                print(f'Neue analyse von Degewo: \n{degewo_apartments}')
+                degewo_apartments = await analyse_apartments(degewo_apartments, apartments)
+                return
+            if spider_name == 'ebay':
+                print(f'Neue analyse von Ebay: \n{ebay_apartments}')
+                ebay_apartments = await analyse_apartments(ebay_apartments, apartments)
+                return
+            if spider_name == 'immonet':
+                print(f'Neue analyse von Immonet: \n{immonet_apartments}')
+                immonet_apartments = await analyse_apartments(immonet_apartments, apartments)
+                return
+            if spider_name == 'immowelt':
+                print(f'Neue analyse von Immowelt: \n{immowelt_apartments}')
+                immowelt_apartments = await analyse_apartments(immowelt_apartments, apartments)
+                return
+            if spider_name == 'wbm':
+                print(f'Neue analyse von WBM: \n{wbm_apartments}')
+                wbm_apartments = await analyse_apartments(wbm_apartments, apartments)
+                return
+        except JSONDecodeError:
+            pass
     return
 
 
@@ -90,12 +99,13 @@ async def get_apartments():
     await analyse('ebay')
     await analyse('immonet')
     await analyse('immowelt')
+    await analyse('wbm')
 
 
 async def send_update(apartment: ApartmentItem):
-    update_message = f'@Karan Ises#2489 \nNeues Objekt gefunden:\n**{apartment.title}**\n**Ort:** {apartment.address}' \
-                     f'\n**Größe:** {apartment.size}\n**Zimmer:** {apartment.rooms}\n**Preis:** {apartment.price}\n' \
-                     f'{apartment.link}'
+    update_message = f'<@252197233716494336> \nNeues Objekt gefunden:\n**{apartment.title}**\n**Ort:** ' \
+                     f'{apartment.address}\n**Größe:** {apartment.size}m²\n**Zimmer:** {apartment.rooms}\n' \
+                     f'**Preis:** {apartment.price}€\n{apartment.link}'
     channel = client.get_channel(id=779434409383297025)
     await channel.send(update_message)
 
