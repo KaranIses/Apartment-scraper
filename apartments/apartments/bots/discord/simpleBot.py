@@ -1,3 +1,4 @@
+import configparser
 import json
 from json import JSONDecodeError
 
@@ -110,5 +111,8 @@ async def send_update(apartment: ApartmentItem):
     await channel.send(update_message)
 
 
+api_key_config = configparser.ConfigParser()
+api_key_config.read("discord_bot_api.ini")
+api_key = api_key_config.get('API_KEY', 'api_key')
 get_apartments.start()
-client.run('YOUR_TOKEN')
+client.run(api_key)
