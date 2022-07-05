@@ -52,7 +52,6 @@ async def analyse(spider_name: str):
                 wbm_apartments = await analyse_apartments(wbm_apartments, apartments)
                 return
         except JSONDecodeError:
-            os.chdir("")
             pass
     return
 
