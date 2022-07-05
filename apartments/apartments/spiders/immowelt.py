@@ -14,9 +14,7 @@ class ImmoweltSpider(scrapy.Spider):
         }
     }
 
-    start_urls = [
-        'https://www.immowelt.de/liste/berlin-lichtenberg/wohnungen/mieten?ama=60&ami=35&d=true&lids=499908&lids=499909&pma=700&rma=2&rmi=1&sd=DESC&sf=TIMESTAMP&sp=1'
-    ]
+    start_urls = []
 
     def parse(self, response):
         for titles in response.css('div.EstateItem-1c115'):

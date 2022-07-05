@@ -1,12 +1,12 @@
 import configparser
 import json
+import os
 from json import JSONDecodeError
 
 import discord
 from discord.ext import tasks
 from pydantic import BaseModel
 
-channel_id = 779434409383297025
 client = discord.Client()
 
 
@@ -28,31 +28,31 @@ wbm_apartments = []
 
 async def analyse(spider_name: str):
     global degewo_apartments, ebay_apartments, immonet_apartments, immowelt_apartments, wbm_apartments
-    with open(f'C:\\Users\\ericz\\PycharmProjects\\Apartment-scraper\\apartments\\{spider_name}.json', 'r',
-              encoding='utf-8') as apartments_json:
+    with open(f'{spider_name}.json', 'r', encoding='utf-8') as apartments_json:
         try:
             apartments = json.load(apartments_json)
             if spider_name == 'degewo':
-                print(f'Neue analyse von Degewo: \n{degewo_apartments}')
+                print(f'New analysis of Degewo: \n{degewo_apartments}')
                 degewo_apartments = await analyse_apartments(degewo_apartments, apartments)
                 return
             if spider_name == 'ebay':
-                print(f'Neue analyse von Ebay: \n{ebay_apartments}')
+                print(f'New analysis of Ebay: \n{ebay_apartments}')
                 ebay_apartments = await analyse_apartments(ebay_apartments, apartments)
                 return
             if spider_name == 'immonet':
-                print(f'Neue analyse von Immonet: \n{immonet_apartments}')
+                print(f'New analysis of Immonet: \n{immonet_apartments}')
                 immonet_apartments = await analyse_apartments(immonet_apartments, apartments)
                 return
             if spider_name == 'immowelt':
-                print(f'Neue analyse von Immowelt: \n{immowelt_apartments}')
+                print(f'New analysis of Immowelt: \n{immowelt_apartments}')
                 immowelt_apartments = await analyse_apartments(immowelt_apartments, apartments)
                 return
             if spider_name == 'wbm':
-                print(f'Neue analyse von WBM: \n{wbm_apartments}')
+                print(f'New analysis of WBM: \n{wbm_apartments}')
                 wbm_apartments = await analyse_apartments(wbm_apartments, apartments)
                 return
         except JSONDecodeError:
+            os.chdir("")
             pass
     return
 
@@ -104,15 +104,18 @@ async def get_apartments():
 
 
 async def send_update(apartment: ApartmentItem):
-    update_message = f'<@252197233716494336> \nNeues Objekt gefunden:\n**{apartment.title}**\n**Ort:** ' \
+    update_message = f'<@{user_id}> \nNeues Objekt gefunden:\n**{apartment.title}**\n**Ort:** ' \
                      f'{apartment.address}\n**Größe:** {apartment.size}m²\n**Zimmer:** {apartment.rooms}\n' \
                      f'**Preis:** {apartment.price}€\n{apartment.link}'
-    channel = client.get_channel(id=779434409383297025)
+    channel = client.get_channel(id=int(channel_id))
     await channel.send(update_message)
 
 
-api_key_config = configparser.ConfigParser()
-api_key_config.read("discord_bot_api.ini")
-api_key = api_key_config.get('API_KEY', 'api_key')
+bot_config = configparser.ConfigParser()
+bot_config.read("discord_bot_api.ini")
+api_key = bot_config.get('DISCORD_BOT', 'api_key')
+channel_id = bot_config.get('DISCORD_BOT', 'channel_id')
+user_id = bot_config.get('DISCORD_BOT', 'user_id')
+os.chdir("..\\..\\..")
 get_apartments.start()
 client.run(api_key)

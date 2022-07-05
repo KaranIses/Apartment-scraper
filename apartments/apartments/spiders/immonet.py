@@ -14,12 +14,7 @@ class ImmonetSpider(scrapy.Spider):
         }
     }
 
-    start_urls = [
-        'https://www.immonet.de/immobiliensuche/sel.do?pageoffset=1&listsize=26&objecttype=1&locationname=Berlin&acid'
-        '=&actype=&city=87372&ajaxIsRadiusActive=false&sortby=19&suchart=2&radius=0&pcatmtypes=1_2&pCatMTypeStoragefi'
-        'eld=1_2&parentcat=1&marketingtype=2&fromprice=100&toprice=600&fromarea=35&toarea=60&fromplotarea=&toplotarea'
-        '=&fromrooms=1&torooms=2&objectcat=-1&wbs=-1&fromyear=&toyear=&fulltext=&absenden=Ergebnisse+anzeigen'
-    ]
+    start_urls = []
 
     def parse(self, response):
         number_of_objects = int(re.sub("[^0-9]", "", response.css('h1.box-50::text').extract_first()))

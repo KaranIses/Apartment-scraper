@@ -14,9 +14,7 @@ class WbmSpider(scrapy.Spider):
         }
     }
 
-    start_urls = [
-        'https://www.wbm.de/wohnungen-berlin/angebote/'
-    ]
+    start_urls = []
 
     def parse(self, response):
         for titles in response.css('div.row.openimmo-search-list-item'):
